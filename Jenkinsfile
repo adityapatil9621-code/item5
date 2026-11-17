@@ -10,7 +10,7 @@ pipeline{
         }
         stage('Building Docker Image'){
             steps {
-                bat 'docker build -t aditya-12-app:latest'
+                bat 'docker build.-t aditya-12-app:latest'
                 echo 'starting the app'
             }
         }
