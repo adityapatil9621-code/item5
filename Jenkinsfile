@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         DOCKER = '/Users/aditya/.docker/bin/docker'
+        PATH = "/Applications/Docker.app/Contents/Resources/bin:/Users/aditya/.docker/bin:${env.PATH}"
     }
 
     stages {
