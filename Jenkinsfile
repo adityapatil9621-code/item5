@@ -1,26 +1,26 @@
-pipeline{
+
+pipeline {
     agent any
-    stages{
-        stage('build'){
+
+    stages {
+        stage('Build') {
             steps {
-                
-                echo 'building the pipeline'
-            }
-            
-        }
-        stage('Building Docker Image'){
-            steps {
-                bat 'docker build.-t aditya-12-app:latest'
-                echo 'starting the app'
+                echo 'Building the pipeline'
             }
         }
-        stage('run the conatiner image'){
+
+        stage('Building Docker Image') {
             steps {
-                sh 'docker rm aditya-12-container || exit 0'
-                sh 'docker run -d --name aditya-12-container -p 8081:80 aditya-12-app:latest '
+                sh 'docker build -t aditya-12-app:latest .'
+                echo 'Docker image built successfully'
             }
         }
-        
-        
+
+        stage('Run the Container Image') {
+            steps {
+                sh 'docker rm -f aditya-12-container || true'
+                sh 'docker run -d --name aditya-12-container -p 8081:80 aditya-12-app:latest'
+            }
+        }
     }
 }
