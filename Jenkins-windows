@@ -1,0 +1,34 @@
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo 'Building the pipeline'
+            }
+        }
+
+        stage('Check Docker') {
+            steps {
+                bat 'docker version'
+            }
+        }
+
+        stage('Building Docker Image') {
+            steps {
+                bat 'docker build -t aditya-12-app:latest .'
+                echo 'Docker image built successfully'
+            }
+        }
+
+        stage('Run the Container Image') {
+            steps {
+                bat 'docker rm -f aditya-12-container || exit /b 0'
+                bat 'docker run -d --name aditya-12-container -p 8081:80 aditya-12-app:latest'
+            }
+        }
+
+    }
+}
